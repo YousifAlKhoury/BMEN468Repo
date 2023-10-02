@@ -14,8 +14,6 @@ void setup() {
   pinMode(LED_RED, OUTPUT);
   pinMode(LED_IR, OUTPUT);
   pinMode(detectorPin, INPUT); //Sets detectorPin as an input pin
-
-  motor.attach(servoPin);
 }
 
 void loop() {
