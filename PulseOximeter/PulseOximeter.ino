@@ -3,8 +3,9 @@
 #include <Servo.h>
 
 //Input Parameters
-const int stabilityDelay = 5; //Delay between turning LED on and reading detector
-const int collectedSamples = 100; //Number of samples collected before calculating/printing SO2
+// PLAY AROUND WITH BOTTOM TWO VARIABLES
+const int stabilityDelay = 3; //Delay between turning LED on and reading detector
+const int collectedSamples = 70; //Number of samples collected before calculating/printing SO2
 const float fitFactor = 0.3; //Factor to multiply by R to fit SO2 to the device
 const boolean serialDisplay = true; //Turn on/off serial display
 
@@ -84,8 +85,13 @@ void loop() {
   if(count >= collectedSamples)
   {
     rVal = ( (redMax - redMin) / redMin ) / ( (irMax-irMin) / irMin ); //Calculates R for the data
+    Serial.print("rVal: ");
+    Serial.println(rVal);
+    
+    // PLAY AROUND WITH 1.1 and 0.3.
     SpO2 = 1.1-0.3*rVal; //Calculates SpO2 for the data
 
+    // You may need to uncomment this till you have found working values for above formula.
     if (SpO2 > 1) {
       SpO2 = 1;
     }
